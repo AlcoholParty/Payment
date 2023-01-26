@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>결제 페이지</h1>
+    <!-- 결제 목록을 리스트로 뽑아내서 작성을 하면될꺼같은데
+         여기에다가 결제 pg사 작성하면 깔끔 그자체
+         버튼 목록 여러개 넣어두고 결제 방식 어떤 거로 할지 넣어두고 form태그로 보내면 될꺼같음
+    -->
+    <ul>
+        <li>
+            <form action="/pay" method="get">
+                <div>자바의 정석</div>
+                <input type="hidden" name="itemName" value="자바의 정석">
+                <div>가격 : 12000</div>
+                <input type="hidden" name="price" value="12000">
+                <div>이책은 어쩌구 저쩌구~~</div>
+                <input type="hidden" name="introduce" value="이책은 어쩌구 저쩌구~~">
+                <input type="submit" value="결제하기">
+            </form>
+        </li>
+    </ul>
+</body>
+
+</html>

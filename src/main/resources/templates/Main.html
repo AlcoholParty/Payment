@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/ul.css">
+</head>
+<body>
+    <ul>
+        <li><input name="btnLogin" type="button" value="로그인" sec:authorize="isAnonymous()" onclick="location.href='/loginform'"></li>
+        <li><input type="submit" sec:authorize="isAuthenticated()" value="로그아웃" onclick="location.href='/logout'"></li>
+        <li><input name="btnMetaRoom" type="button" value="메타버스 방" sec:authorize="isAuthenticated()" onclick="location.href='/meta'"></li>
+        <li><input name="btnPay" type="button" value="결제 페이지" sec:authorize="isAuthenticated()" onclick="location.href='/payform'"></li>
+    </ul>
+</body>
+</html>

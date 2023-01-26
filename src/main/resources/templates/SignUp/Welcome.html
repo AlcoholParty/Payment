@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- 모델로 객체를 바인딩할 경우 getter를 사용하여 값을 꺼내올 수 있다. -->
+    <div th:text="${member.getNickname} + '님 가입을 환영합니다!'"></div>
+    <div th:text="${member.getNickname} + '님의 현제 권한은 ' + ${member.getRoleName} + '입니다.'"></div>
+    <input type="button" value="메인으로" onclick="location.href='/'">
+</body>
+</html>
