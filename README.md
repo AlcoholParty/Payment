@@ -19,7 +19,7 @@
 		phoneNumber VARCHAR(15) NOT NULL,
 		address VARCHAR(100) NOT NULL,
 		roleName VARCHAR(100) NOT NULL
-		);
+	);
 	
 	CREATE TABLE Pay(
 		uod VARCHAR(200) PRIMARY KEY,
@@ -32,7 +32,7 @@
 		buyerTel VARCAHR(15) NOT NULL,
 		buyerAddress VARCHAR(100) NOT NULL,
 		buyerPostNumber VARCHAR(50)
-		);
+	);
 	
 	CREATE TABLE Store(
 		storeIdx INT PRIMARY KEY,
@@ -43,6 +43,6 @@
 		stock INT NOT NULL,
 		goodsLike INT,
 		itemName VARCHAR(50) NOT NULL
-		);
+	);
 
 	
