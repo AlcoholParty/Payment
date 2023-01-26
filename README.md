@@ -1,13 +1,13 @@
 # Payment
-##아임포트 결제 API
-##결제 API를 이용해서 실제 카카오페이로 테스트 결제까지 가능하게 기능을 구현
-###사용된 데이터베이스
-###MySQL - soju
+## 아임포트 결제 API
+## 결제 API를 이용해서 실제 카카오페이로 테스트 결제까지 가능하게 기능을 구현
+### 사용된 데이터베이스
+### MySQL - soju
 
 	CREATE DATABASE soju;
 	USE soju;
 
-###사용된 테이블 : Member, Pay, Store
+### 사용된 테이블 : Member, Pay, Store
 	
 	CREATE TABLE Member(
 		emailId VARCHAR(50) PRIMARY KEY,
