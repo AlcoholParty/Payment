@@ -17,7 +17,7 @@
             IMP.request_pay({
             //pg사명, pg사명.CID
             //https://docs.iamport.kr/sdk/javascript-sdk#request_pay 에서 pg사 코드 확인가능
-            pg: 'kakaopay.TC0ONETIME',
+            pg: [[${pay}]],
             //지불 방법
             pay_method: 'card',
             //가맹점 주문번호(DB에 저장할 겹치지않는 스트링타입) --> primaryKey로 잡아도 될꺼같다
@@ -55,7 +55,8 @@
 	                            "&emailId=" + rsp.buyer_email +
 	                            "&name=" + rsp.buyer_name
 	                            "&phoneNumber=" + rsp.buyer_tel
-	                            "&adderss=" + rsp.buyer_addr;
+	                            "&adderss=" + rsp.buyer_addr
+	                            "&PGName=" + rsp.pg_provider;
 	                sendRequest(url, param, res, "post");
                 } else {
                     alert("실패 : 코드(" + rsp.error_code + ")/ 메세지(" + rsp.error_msg + ")");

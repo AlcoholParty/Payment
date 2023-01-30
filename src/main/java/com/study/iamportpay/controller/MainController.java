@@ -2,9 +2,11 @@ package com.study.iamportpay.controller;
 
 
 import com.study.iamportpay.entity.Member;
+import com.study.iamportpay.entity.Pay;
 import com.study.iamportpay.entity.PayRequest;
 import com.study.iamportpay.entity.Store;
 import com.study.iamportpay.repository.MemberRepository;
+import com.study.iamportpay.repository.PayRepository;
 import com.study.iamportpay.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,13 @@ public class MainController {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private PayRepository payRepository;
+
     //결제가 완료 되었을때 들어갈 정보들
     private Member.rpMemberAll payMember;
     private Store payStore;
+    private Pay resPay;
 
     // 메인 페이지
     @GetMapping(value = "/")
@@ -61,7 +67,7 @@ public class MainController {
 
     //결제를 하는 페이지
     @GetMapping("/pay")
-    public String pay(Model model, Store store, Principal principal){
+    public String pay(Model model, Store store, Principal principal, Pay pay){
         String name = principal.getName();
         Member.rpMemberAll member = payService.findAll(name);
         //로그인이 되어있는 정보에서 모든 정보를 끌어옴
@@ -70,13 +76,14 @@ public class MainController {
         //스토어 객체를 스토어에 있는 모든 정보를 끌고와야댐
         Store realStore = store;
         model.addAttribute("store", realStore);
+        model.addAttribute("pay", pay.getPGName());
         return "Pay/Pay";
     }
 
     //결제 완료 정보를 얻어올 엔드포인트
     @RequestMapping(value = {"/pay/complete"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String payComplete(PayRequest payRequest, Member member, Store store){
+    public String payComplete(PayRequest payRequest, Member member, Store store, Pay pay){
         //payRequestVO가 값이 비어있다면 no
         //값이 비어있지않다면 yes를 반환한다.
         String res = "no";
@@ -89,6 +96,23 @@ public class MainController {
             //payMember, payStore에 저장
             payMember = resMember;
             payStore = resStore;
+            //pay로 받아온 pay클래스안에 정보들을 저장
+            pay.setPayMethod("card");
+            pay.setImpUid(payRequest.getImp_uid());
+            pay.setMerchantUid(payRequest.getMerchant_uid());
+            pay.setPrice(payStore.getPrice());
+            pay.setBuyerName(payMember.getName());
+            pay.setBuyerEmail(payMember.getEmailId());
+            pay.setBuyerAddress(payMember.getAddress());
+            pay.setBuyerTel(payMember.getPhoneNumber());
+            pay.setItemName(payStore.getItemName());
+            //실제 정보를 resPay 객체로 저장하고 그 정보들을 db에 저장
+            resPay = pay;
+            //만약 resPay 객체안에 정보들이 들어가지않으면 결제실패 라고 넘겨주기;
+            if(resPay == null){
+                res = "no";
+            }
+            payRepository.save(resPay);
             res = "yes";
         }
         return res;
