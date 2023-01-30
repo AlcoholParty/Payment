@@ -45,4 +45,24 @@
 		itemName VARCHAR(50) NOT NULL
 	);
 
+## 수정 작업
+### 데이터베이스
+### 추가된 테이블 : Pay
+	CREATE TABLE Pay(
+		impUid VARCHAR(200) PRIMARY KEY,
+		merchantUid VARCHAR(200),
+		PGname VARCHAR(50), 
+		payMethod VARCHAR(300),
+		itemName VARCHAR(50),
+		price INT,
+		buyerEmail VARCHAR(50),
+		buyerName VARCHAR(20),
+		buyerTel VARCHAR(20),
+		buyerAddress VARCHAR(50),
+		buyerPostNum VARCHAR(50)
+	);
+
+### 변경된 내용
+### 결제 이후 컨트롤러로 데이터를 전송
+### 이후 컨트롤러에서 받은 정보들을 데이터베이스에 저장
 	
